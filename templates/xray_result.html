@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">X-ray Analysis Results</div>
+    <div class="card-body">
+        <h5>Predictions:</h5>
+        <ul class="list-group">
+            {% for disease, probability in prediction.items() %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                {{ disease }}
+                <span class="badge bg-primary rounded-pill">{{ (probability * 100) | round(2) }}%</span>
+            </li>
+            {% endfor %}
+        </ul>
+        <h5 class="mt-4">X-ray Image:</h5>
+        <img src="{{ url_for('static', filename='uploads/' + image) }}" class="img-fluid img-thumbnail" alt="X-ray Image">
+    </div>
+</div>
+{% endblock %}

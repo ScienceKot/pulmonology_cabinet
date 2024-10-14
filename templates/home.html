@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="text-center">
+    <h1>Welcome to the Pulmonologist's App</h1>
+    <p class="lead">Manage patients' X-rays and medical data efficiently and securely.</p>
+    <a href="{{ url_for('add_patient') }}" class="btn btn-primary">Add New Patient</a>
+    <a href="{{ url_for('patient_list') }}" class="btn btn-secondary">View Patient List</a>
+</div>
+{% endblock %}

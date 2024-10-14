@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">Patient Details</div>
+    <div class="card-body">
+        <form method="post">
+            <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="name" name="name" value="{{ patient.name }}" required>
+            </div>
+            <div class="mb-3">
+                <label for="surname" class="form-label">Surname</label>
+                <input type="text" class="form-control" id="surname" name="surname" value="{{ patient.surname }}" required>
+            </div>
+            <div class="mb-3">
+                <label for="birth_date" class="form-label">Date of Birth</label>
+                <input type="date" class="form-control" id="birth_date" name="birth_date" value="{{ patient.birth_date }}" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Update Patient</button>
+        </form>
+    </div>
+</div>
+
+<!-- Display X-ray details if available -->
+{% if patient.xray_image %}
+<div class="card mt-4">
+    <div class="card-header">X-ray Test Details</div>
+    <div class="card-body">
+        {% if patient.xray_image %}
+        <h5>X-ray Image:</h5>
+        <img src="{{ url_for('static', filename='uploads/' + patient.xray_image) }}" class="img-fluid img-thumbnail" alt="X-ray Image">
+        {% endif %}
+
+        <h5 class="mt-4">Predictions:</h5>
+        <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Tuberculosis
+                <span class="badge bg-primary rounded-pill">{{ (patient.xray_tuberculosis_proba * 100) | round(2) }}%</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Coronavirus Disease
+                <span class="badge bg-primary rounded-pill">{{ (patient.xray_covid_proba * 100) | round(2) }}%</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Normal
+                <span class="badge bg-primary rounded-pill">{{ (patient.xray_normal_proba * 100) | round(2) }}%</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Bacterial Pneumonia
+                <span class="badge bg-primary rounded-pill">{{ (patient.xray_bacterial_pneumonia_proba * 100) | round(2) }}%</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Viral Pneumonia
+                <span class="badge bg-primary rounded-pill">{{ (patient.xray_viral_pneumonia_proba * 100) | round(2) }}%</span>
+            </li>
+        </ul>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
