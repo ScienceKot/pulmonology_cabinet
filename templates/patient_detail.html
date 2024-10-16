@@ -58,4 +58,17 @@
     </div>
 </div>
 {% endif %}
+
+<!-- Lung Cancer Probability Display -->
+{% if patient.lung_cancer_probability %}
+<div class="card mt-4">
+    <div class="card-header">Lung Cancer Prediction</div>
+    <div class="card-body">
+        <h5>Lung Cancer Probability:
+            <span class="badge bg-danger">{{ (patient.lung_cancer_probability * 100) | round(2) }}%</span>
+        </h5>
+    </div>
+</div>
+{% endif %}
+
 {% endblock %}

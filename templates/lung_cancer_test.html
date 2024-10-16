@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg border-0">
+                <div class="card-header bg-primary text-white text-center">
+                    <h4>Lung Cancer Prediction Test</h4>
+                </div>
+                <div class="card-body">
+                    <form method="POST">
+                        <!-- Gender -->
+                        <div class="mb-3">
+                            <label for="gender" class="form-label">Gender</label>
+                            <select id="gender" name="gender" class="form-select" required>
+                                <option value="M">Male</option>
+                                <option value="F">Female</option>
+                            </select>
+                        </div>
+
+                        <!-- Smoking -->
+                        <div class="mb-3">
+                            <label for="smoking" class="form-label">Smoking</label>
+                            <select id="smoking" name="smoking" class="form-select" required>
+                                <option value="2">YES</option>
+                                <option value="1">NO</option>
+                            </select>
+                        </div>
+
+                        <!-- Rest of the fields -->
+                        {% for field in ['yellow_fingers', 'anxiety', 'peer_pressure', 'chronic_disease', 'fatigue', 'allergy', 'wheezing', 'alcohol', 'coughing', 'shortness_of_breath', 'swallowing_difficulty', 'chest_pain'] %}
+                        <div class="mb-3">
+                            <label for="{{ field }}" class="form-label">{{ field.replace('_', ' ').capitalize() }}</label>
+                            <select id="{{ field }}" name="{{ field }}" class="form-select" required>
+                                <option value="2">YES</option>
+                                <option value="1">NO</option>
+                            </select>
+                        </div>
+                        {% endfor %}
+
+                        <!-- Submit Button -->
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-success btn-lg">
+                                <i class="fas fa-calculator"></i> Calculate Lung Cancer Risk
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
